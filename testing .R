@@ -51,10 +51,7 @@ View(netflix_titles3)
 netflix_titles3[is.Date(netflix_titles3$date_added) == FALSE,]
 
 # Convert date format from yyyy-mm-dd to yyyy-mm
-format(as.Date(netflix_titles3$date_added, "%Y-%m-%d"), "%Y-%m")
-View(netflix_titles3) 
-
-format(as.Date(netflix_titles3$date_added, "%Y-%m"))
+netflix_titles3$date_year_month <- format(as.Date(netflix_titles3$date_added, "%Y-%m-%d"), "%Y-%m")
 View(netflix_titles3)
 
 # Drop description column
