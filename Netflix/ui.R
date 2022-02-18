@@ -1,7 +1,8 @@
 library(shiny)
+library("DT")
 
 navbarPage(
-  "Netflix Tv Show and Movie", 
+  "Netflix Tv Shows and Movies", 
   tabPanel(
     "Tv Show",
     fluidPage()
