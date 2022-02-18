@@ -14,7 +14,7 @@ netflix_titles2 <- read.csv("data/netflix_titles.csv", header = TRUE, na.strings
 View(netflix_titles2)
 
 # view distinct types of shows 
-unique(netflix_titles2$type)
+unique(netflix_titles2$rating)
 
 # view distinct type of countries 
 unique(netflix_titles2$country)
@@ -32,8 +32,7 @@ netflix_titles3 <- netflix_titles2 %>% na.omit()
 View(netflix_titles3)
 
  
-str_split()
-
+# str_split()
 # strsplit(netflix_titles3$country, ", ")
 
 # create new column for genre
@@ -50,16 +49,15 @@ View(netflix_titles3)
 
 netflix_titles3[is.Date(netflix_titles3$date_added) == FALSE,]
 
-# Convert date format from yyyy-mm-dd to yyyy-mm
-netflix_titles3$date_year_month <- format(as.Date(netflix_titles3$date_added, "%Y-%m-%d"), "%Y-%m")
+# Convert date format from yyyy-mm-dd to yyyy
+netflix_titles3$date_year <- format(as.Date(netflix_titles3$date_added, "%Y-%m-%d"), "%Y")
 View(netflix_titles3)
 
 # Drop description column
 netflix_titles3$description <- NULL
 View(netflix_titles3)
 
-# tesing commit message 5
-
+unique(netflix_titles2$rating)
 
 write_csv(netflix_titles3, "processed_netflix.csv")
 
