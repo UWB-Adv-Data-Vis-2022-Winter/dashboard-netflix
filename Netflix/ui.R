@@ -5,11 +5,15 @@ navbarPage(
   "Netflix Tv Shows and Movies", 
   tabPanel(
     "Tv Show",
-    fluidPage()
+    fluidPage(
+      DTOutput("tv_shows")
+    )
   ),
     tabPanel(
       "Movie",
-      fluidPage()
+      fluidPage(
+        DTOutput("movies")
+      )
     )
 )
 
