@@ -7,7 +7,8 @@ navbarPage(
   tabPanel(
     "Tv Show",
     fluidPage(
-     # renderPlot("tv_show_graph"), 
+      
+      plotOutput("tv_shows_graph"),
       DTOutput("tv_shows")
     )
   ),
