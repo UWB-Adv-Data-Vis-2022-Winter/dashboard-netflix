@@ -1,25 +1,41 @@
 library(shiny)
 library("DT")
 
-
-
 shinyServer(function(input, output) {
+  
   netflix <- netflix_titles3
+  
+  content_list <- unique(netflix_titles3$type)
+  
+  # create new column for genre
+  netflix_titles3$genre <- strsplit(netflix_titles3$listed_in, ", ")
+  
+  # return unique genre values 
+  genre_list <- unlist(netflix_titles3$genre) %>%
+    unique()
+  
+#  output$genre_tv_show_filter <- renderPlot({
+#    netflix %>%
+#      filter(
+#        genre == input$select_genre_tv_show
+#      )
+#  })
+  
+
 # bar graph of tv shows count per year 
-  output$tv_shows_graph <- renderPlot({
-    
-    netflix_tv_show_graph_filtered <- netflix %>% 
-      filter(
-        type == "TV Show"
-      ) %>%
-      group_by(date_year) %>%
-      summarize(n = n()) %>% 
-      drop_na()
+  netflix_tv_show_graph_filtered <- netflix %>% 
+    filter(
+      type == "TV Show"
+    ) %>%
+    group_by(date_year) %>%
+    summarize(n = n()) %>% 
+    drop_na() 
       
     ggplot(netflix_tv_show_graph_filtered) + 
       geom_col(aes(x = date_year, y = n ))
+   
       
-  }) 
+ 
 # Data table of the tv shows  
   output$tv_shows <- renderDT({
     netflix %>% 
