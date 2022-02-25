@@ -15,6 +15,8 @@ navbarPage(
     tabPanel(
       "Movie",
       fluidPage(
+        
+        plotOutput("movies_graph"),
         DTOutput("movies")
       )
     )
