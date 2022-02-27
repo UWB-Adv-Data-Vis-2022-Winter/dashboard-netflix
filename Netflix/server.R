@@ -13,13 +13,7 @@ shinyServer(function(input, output, session) {
   # return unique genre values 
   genre_list <- unlist(netflix_titles3$genre) %>%
     unique()
-  
-#  output$genre_tv_show_filter <- renderPlot({
-#    netflix %>%
-#      filter(
-#        genre == input$select_genre_tv_show
-#      )
-#  })
+
   
 updateSelectInput(session,
                   "select_content_type", choices = content_list)
