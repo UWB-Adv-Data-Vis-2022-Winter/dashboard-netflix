@@ -12,12 +12,28 @@ navbarPage(
       
       selectInput("select_genre_tv_show", h3(" Select Genre"),
       choice = genre_list, multiple = TRUE), 
+      
+      
+      
+      
+      
 
 # populates a graph to count shows per year 
 # populates a data table of the TV Shows 
       
-      plotOutput("tv_shows_graph"),
+      plotOutput("netflix_bar_graph"),
       DTOutput("tv_shows")
+
+
+
+
+
+
+
+
+
+
+
 
     )
   ),

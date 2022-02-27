@@ -1,7 +1,7 @@
 library(shiny)
 library("DT")
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   netflix <- netflix_titles3
   
@@ -21,7 +21,15 @@ shinyServer(function(input, output) {
 #      )
 #  })
   
+updateSelectInput(session,
+                  "select_content_type", choices = content_list)
 
+updateSelectInput(session,
+                  "select_genre_tv_show", choices = content_list)
+
+
+
+  
 # bar graph of tv shows count per year 
   netflix_tv_show_graph_filtered <- netflix %>% 
     filter(
