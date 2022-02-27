@@ -10,7 +10,7 @@ navbarPage(
       
       selectInput("select_content_type", h3(" Select Content"), choice = content_list), 
       
-      selectInput("select_genre_tv_show", h3(" Select Genre"),
+      selectInput("select_genre", h3(" Select Genre"),
       choice = genre_list, multiple = TRUE), 
       
       

@@ -25,7 +25,7 @@ updateSelectInput(session,
                   "select_content_type", choices = content_list)
 
 updateSelectInput(session,
-                  "select_genre_tv_show", choices = content_list)
+                  "select_genre_tv_show", choices = genre_list)
 
 
 
