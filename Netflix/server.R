@@ -19,9 +19,26 @@ updateSelectInput(session,
                   "select_content_type", choices = content_list)
 
 updateSelectInput(session,
-                  "select_genre_tv_show", choices = genre_list)
+                  "select_genre_tv_show", choices = new_genre_list())
 
+new_genre_list <- reactive({
+  req(input$select_content_type)
+  netflix %>% 
+    filter(
+       type == input$select_content_type) %>%
+    genre_list %>%
+    drop_na() %>%
+    unique()
+})    
+    
 
+output$plot <- renderPlot({
+  ggplot(new_genre_list()) + 
+  geom_col(aes(x = date_year, y = n )) 
+    
+})
+ 
+     
 
   
 # bar graph of tv shows count per year 
@@ -68,8 +85,9 @@ updateSelectInput(session,
         type == "Movie"
       )  %>%
       select(title, genre, date_added, duration, rating) 
-  })
-
-  
 })
+
+})
+
+
 

@@ -8,14 +8,12 @@ navbarPage(
     "Tv Show",
     fluidPage(
       
-      selectInput("select_content_type", h3(" Select Content"), choice = content_list), 
+      selectInput("select_content_type", label = h3(" Select Content"), 
+                  choices = content_list, selected  = NULL), 
+     
       
-      selectInput("select_genre", h3(" Select Genre"),
-      choice = genre_list, multiple = TRUE), 
-      
-      
-      
-      
+      selectInput("select_genre", label = h3(" Select Genre"),
+      choices = new_genre_list(), multiple = TRUE, selected  = new_genre_list()), 
       
 
 # populates a graph to count shows per year 
