@@ -13,7 +13,7 @@ navbarPage(
      
       
       selectInput("select_genre", label = h3(" Select Genre"),
-      choices = new_genre_list(), multiple = TRUE, selected  = new_genre_list()), 
+      choices = genre_list, multiple = TRUE, selected  = NULL), 
       
 
 # populates a graph to count shows per year 
@@ -21,28 +21,10 @@ navbarPage(
       
       plotOutput("netflix_bar_graph"),
       DTOutput("tv_shows")
-
-
-
-
-
-
-
-
-
-
-
-
-    )
-  ),
-    tabPanel(
-      "Movie",
-      fluidPage(
-        
-        plotOutput("movies_graph"),
-        DTOutput("movies")
-      )
-    )
 )
+)
+)
+
+
 
 

@@ -19,39 +19,19 @@ updateSelectInput(session,
                   "select_content_type", choices = content_list)
 
 updateSelectInput(session,
-                  "select_genre_tv_show", choices = new_genre_list())
+                  "select_genre_tv_show", choices = genre_list)
 
-new_genre_list <- reactive({
-  req(input$select_content_type)
-  netflix %>% 
-    filter(
-       type == input$select_content_type) %>%
-    genre_list %>%
-    drop_na() %>%
-    unique()
-})    
-    
-
-output$plot <- renderPlot({
-  ggplot(new_genre_list()) + 
-  geom_col(aes(x = date_year, y = n )) 
-    
-})
- 
-     
 
   
 # bar graph of tv shows count per year 
-  netflix_tv_show_graph_filtered <- netflix %>% 
+  observe(netflix_tv_show_graph_filtered <- netflix %>% 
     filter(
-      type == "TV Show"
+      type %in% input$select_content_type, (listed_in) %in% input$select_genre
     ) %>%
     group_by(date_year) %>%
     summarize(n = n()) %>% 
-    drop_na() 
-      
-    ggplot(netflix_tv_show_graph_filtered) + 
-      geom_col(aes(x = date_year, y = n ))
+    drop_na()) 
+    
    
       
  
@@ -59,35 +39,15 @@ output$plot <- renderPlot({
   output$tv_shows <- renderDT({
     netflix %>% 
       filter(
-        type == "TV Show"
+        type %in% input$select_content_type, (listed_in) %in% input$select_genre
       )  %>%
       select(title, genre, date_added, duration, rating) 
       
   })
-# bar graph of movie count per year   
-  output$movies_graph <- renderPlot({
-    
-    netflix_movies_graph_filtered <- netflix %>% 
-      filter(
-        type == "Movie"
-      ) %>%
-      group_by(date_year) %>%
-      summarize(n = n())
-    
-    ggplot(netflix_movies_graph_filtered) + 
-      geom_col(aes(x = date_year, y = n ))
-    
-  })
-# data table for movies 
-  output$movies <- renderDT({
-    netflix %>% 
-      filter(
-        type == "Movie"
-      )  %>%
-      select(title, genre, date_added, duration, rating) 
+  
 })
 
-})
+
 
 
 
