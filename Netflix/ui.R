@@ -13,7 +13,7 @@ navbarPage(
      
       
       selectInput("select_genre", label = h3(" Select Genre"),
-      choices = genre_list, multiple = TRUE, selected  = NULL), 
+      choices = genre_list, multiple = TRUE, selected  = "Dramas"), 
       
 
 # populates a graph to count shows per year 
