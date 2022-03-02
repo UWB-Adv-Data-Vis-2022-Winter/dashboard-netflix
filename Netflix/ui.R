@@ -1,11 +1,12 @@
 library(shiny)
 library("DT")
+library(lubridate)
 
 
 navbarPage(
   "Netflix Tv Shows and Movies", 
   tabPanel(
-    "Tv Show",
+    "Dashboard",
     fluidPage(
       
       selectInput("select_content_type", label = h3(" Select Content"), 
@@ -20,7 +21,7 @@ navbarPage(
 # populates a data table of the TV Shows 
       
       plotOutput("netflix_bar_graph"),
-      DTOutput("tv_shows")
+      DTOutput("content_table")
 )
 )
 )
