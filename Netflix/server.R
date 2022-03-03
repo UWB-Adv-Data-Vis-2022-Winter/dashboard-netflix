@@ -22,33 +22,38 @@ updateSelectInput(session,
 updateSelectInput(session,
                   "select_genre_tv_show", choices = genre_list)
 
-observe(netflix_tv_show_graph_filtered <- netflix %>% 
-          filter(
-            type %in% input$select_content_type, grepl(input$select_genre, listed_in)) %>%
+observe(netflix_tv_show_graph_filtered <- netflix_titles3 %>% 
+          filter(type %in% input$select_content_type) %>%
+          subset(input$select_genre %in% genre) %>%
           group_by(date_year) %>%
           summarize(n = n()) %>% 
           drop_na()) 
     
 # bar graph of tv shows count per year    
-  output$netflix_bar_graph <- renderPlot({
+output$result <- renderText({
+  paste("You chose", unlist(input$select_genre))
+})
+output$netflix_bar_graph <- renderPlot({
     
-    netflix_tv_show_graph_filtered <- netflix %>% 
-      filter(
-        type %in% input$select_content_type, grepl(input$select_genre, listed_in)) %>%
+    netflix_tv_show_graph_filtered <- netflix_titles3 %>% 
+      filter(type %in% input$select_content_type) %>%
+      subset(input$select_genre %in% genre) %>%
       group_by(date_year) %>%
       summarize(n = n()) %>% 
       drop_na()
      
     ggplot(netflix_tv_show_graph_filtered) + 
       geom_col(aes(x = date_year, y = n))  
+    
+    netflix %>% select( )
  
 })
   
 # Data table of the tv shows  
   output$content_table <- renderDT({
-    netflix %>% 
-      filter(
-        type %in% input$select_content_type, grepl(input$select_genre, listed_in)) %>%
+    netflix_titles3 %>% 
+      filter(type %in% input$select_content_type) %>%
+      subset(input$select_genre %in% genre) %>%
       select(title, genre, date_added, duration, rating) 
       
   })
