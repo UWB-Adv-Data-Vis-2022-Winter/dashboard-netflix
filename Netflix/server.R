@@ -40,7 +40,10 @@ observe(netflix_tv_show_graph_filtered <- netflix %>%
       drop_na()
      
     ggplot(netflix_tv_show_graph_filtered) + 
-      geom_col(aes(x = date_year, y = n))  
+      geom_col(aes(x = date_year, y = n)) + 
+      labs(title = ('Netflix content added' ), 
+           subtitle = ('This plot shows the count of content based on the genre the user selects'),
+           x = NULL, y = NULL)
  
 })
   
