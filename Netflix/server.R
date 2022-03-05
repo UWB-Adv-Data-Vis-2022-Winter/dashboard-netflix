@@ -15,7 +15,7 @@ shinyServer(function(input, output, session) {
   genre_list <- unlist(netflix_titles3$genre) %>%
     unique()
 
-  
+# Attempt to create a url to data source, works only in brower access 
 url <- a("Netflix Dataset", href = "https://www.google.com/")
   output$tab <- renderUI({
     tagList("URL LINK: ", url)
