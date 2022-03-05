@@ -12,11 +12,13 @@ shinyServer(function(input, output, session) {
   netflix_titles3$genre <- strsplit(netflix_titles3$listed_in, ", ")
   names(netflix_titles3$genre) <- netflix_titles3$show_id
   
+  # Select Content widget 
   output$type <- renderUI({
     selectInput("select_content_type", label = h3(" Select Content"), 
                 choices = content_list, selected  = content_list[1])
   })
   
+  # Select Genre Widget
   output$genre <- renderUI({
     selectInput("select_genre_tv_show", label = h3(" Select Genre"),
                 choices = genre(), multiple = TRUE, selected  = NULL)
@@ -135,11 +137,11 @@ shinyServer(function(input, output, session) {
   
 # Data table of the tv shows  
   
-  output$shows <- renderDT({
-    titles <- netflix_titles3 %>%
-      filter(type %in% input$type) %>%
-      filter(genre %in% (input$genre)) %>%
-    select(title, genre, date_added, duration, rating, show_id)
+  # output$shows <- renderDT({
+  #   titles <- netflix_titles3 %>%
+  #     filter(type %in% input$type) %>%
+  #     filter(genre %in% (input$genre)) %>%
+  #   select(title, genre, date_added, duration, rating, show_id)
     
     #selected_genre %>%
     #  left_join(selected_genre, titles) %>% 
