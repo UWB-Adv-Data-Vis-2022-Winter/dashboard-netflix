@@ -16,6 +16,13 @@ shinyServer(function(input, output, session) {
     unique()
 
   
+url <- a("Netflix Dataset", href = "https://www.google.com/")
+  output$tab <- renderUI({
+    tagList("URL LINK: ", url)
+  })
+  
+  
+  
 updateSelectInput(session,
                   "select_content_type", choices = content_list)
 
