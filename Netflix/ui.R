@@ -7,8 +7,8 @@ fluidPage(
   titlePanel("Netflix Tv Shows and Movies"), 
   sidebarLayout(
     sidebarPanel(
-      uiOutput("type"),
-      uiOutput("genre")
+      uiOutput("type_ui"),
+      uiOutput("genre_ui")
       ),
     mainPanel(
       textOutput("result"),
