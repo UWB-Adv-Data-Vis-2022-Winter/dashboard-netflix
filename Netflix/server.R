@@ -13,9 +13,9 @@ shinyServer(function(input, output, session) {
   names(netflix_titles3$genre) <- netflix_titles3$show_id
   
   # Attempt to create a url to data source, works only in brower access 
-  url <- a("Netflix Dataset", href = "https://www.google.com/")
+  url <- a("Netflix Dataset", href = "https://www.kaggle.com/shivamb/netflix-shows")
   output$tab <- renderUI({
-    tagList("URL LINK: ", url)
+    tagList("URL link to orignal dataset: ", url)
   })
   
   # Select Content widget 
@@ -65,8 +65,14 @@ shinyServer(function(input, output, session) {
       netflix_titles3 %>%
         filter(
           type %in% input$select_content_type, grepl(paste(input$select_genre, collapse="|"), genre)) %>%
-        select(title, genre, date_added, duration, rating)
+        select(title, genre, date_added, duration, rating) %>%
+        datatable(options = list(
+        initComplete = JS(
+            "function(settings, json) {",
+            "$(this.api().table().header()).css({'background-color': 'red', 'color': 'white'});",
+            "}")))
     })
+    
     output$netflix_bar_graph <- renderPlot({
       netflix_titles3 %>%
         filter(
@@ -74,8 +80,9 @@ shinyServer(function(input, output, session) {
         group_by(date_year) %>%
         summarize(n = n()) %>%
         drop_na() %>%
-        ggplot(.) +
-        geom_col(aes(x = date_year, y = n)) +
+        ggplot(.) +   #E50914
+        geom_col(aes(x = date_year, y = n), fill = '#E50914') +
+        theme(plot.title = element_text(size=22)) +
         labs(title = ('Netflix content by year graph' ), 
              subtitle = ('This plot shows the count of content based on the genre the user selected content type and genre'),
              x = NULL, y = NULL)
