@@ -12,6 +12,12 @@ shinyServer(function(input, output, session) {
   netflix_titles3$genre <- strsplit(netflix_titles3$listed_in, ", ")
   names(netflix_titles3$genre) <- netflix_titles3$show_id
   
+  # Attempt to create a url to data source, works only in brower access 
+  url <- a("Netflix Dataset", href = "https://www.google.com/")
+  output$tab <- renderUI({
+    tagList("URL LINK: ", url)
+  })
+  
   # Select Content widget 
   output$type_ui <- renderUI({
     selectInput("select_content_type", label = h3(" Select Content"), 
@@ -69,7 +75,10 @@ shinyServer(function(input, output, session) {
         summarize(n = n()) %>%
         drop_na() %>%
         ggplot(.) +
-        geom_col(aes(x = date_year, y = n))
+        geom_col(aes(x = date_year, y = n)) +
+        labs(title = ('Netflix content by year graph' ), 
+             subtitle = ('This plot shows the count of content based on the genre the user selected content type and genre'),
+             x = NULL, y = NULL)
     })
   })
 })
