@@ -1,27 +1,22 @@
 library(shiny)
-library("DT")
-library(lubridate)
+library(lubridate, warn.conflicts = FALSE)
 
 
-navbarPage(
-  "Netflix Tv Shows and Movies", 
-  tabPanel(
-    "Dashboard",
-    fluidPage(
-      
-      selectInput("select_content_type", label = h3(" Select Content"), 
-                  choices = content_list, selected  = NULL), 
-     
-      
-      selectInput("select_genre", label = h3(" Select Genre"),
-      choices = genre_list, multiple = TRUE, selected  = "Dramas"),
+fluidPage(
+  titlePanel("Netflix Tv Shows and Movies"), 
+  sidebarLayout(
+    sidebarPanel(
+      uiOutput("type_ui"),
+      uiOutput("genre_ui")
+    ),
+    mainPanel(
       textOutput("result"),
       plotOutput("netflix_bar_graph"),
+      DTOutput("shows"),
       DTOutput("content_table")
+    ))
+  
 )
-)
-)
-
 
 
 

@@ -43,6 +43,7 @@ View(netflix_titles3)
 unlist(netflix_titles3$genre) %>%
   unique()
 
+
 # Convert chr to date for date_added 
 netflix_titles3$date_added <- dmy(netflix_titles3$date_added)
 View(netflix_titles3)
