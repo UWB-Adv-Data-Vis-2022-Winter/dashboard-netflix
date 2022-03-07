@@ -1,4 +1,5 @@
 library(shiny)
+library("DT")
 library(lubridate)
 library(tidyverse)
 library(reactlog)
