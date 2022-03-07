@@ -1,6 +1,5 @@
 library(shiny)
-library("DT")
-library(lubridate)
+library(lubridate, warn.conflicts = FALSE)
 
 
 fluidPage(
@@ -9,16 +8,15 @@ fluidPage(
     sidebarPanel(
       uiOutput("type_ui"),
       uiOutput("genre_ui")
-      ),
+    ),
     mainPanel(
       textOutput("result"),
-      DTOutput("shows"),
       plotOutput("netflix_bar_graph"),
+      DTOutput("shows"),
       DTOutput("content_table")
-      ))
-      
+    ))
+  
 )
-
 
 
 
